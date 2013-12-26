@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
 require 'commitphotos'
+
+Commitphotos.new(command: ARGV)
