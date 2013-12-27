@@ -6,7 +6,7 @@ include FileUtils
 
 module Commitphotos
   def video
-    file = "/tmp/#{Time.now}.mov"
+    file = "/tmp/#{Time.now.to_i}.mov"
     message = `git log -1 HEAD --pretty=format:%s`
     
     begin
@@ -19,12 +19,12 @@ module Commitphotos
         "email" => `git config --get user.email`.chomp,
         "user_name" => `git config --get user.name`.chomp,
         "photo" => video
-        }
-      )
+      })
       
       remove file
-    rescue => e
-      puts "Error: #{e.message}"
+      exit 0
+    rescue => error
+      puts "Error: #{error.message}"
       remove file
       exit 1
     end

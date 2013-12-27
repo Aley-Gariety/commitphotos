@@ -1,3 +1,4 @@
+require "mini_magick"
 require 'rest-client'
 require 'fileutils'
 
@@ -18,13 +19,12 @@ module Commitphotos
         "email" => `git config --get user.email`.chomp,
         "user_name" => `git config --get user.name`.chomp,
         "photo" => image
-        }
-      )
+      })
      
       remove file
       exit 0
-    rescue => e
-      puts "there was an error: #{e.message}"
+    rescue => error
+      puts "there was an error: #{error.message}"
       remove file
       exit 1
     end
