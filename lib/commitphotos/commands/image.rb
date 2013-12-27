@@ -1,4 +1,7 @@
 require 'rest-client'
+require 'fileutils'
+
+include FileUtils
 
 module Commitphotos
   def image
@@ -16,11 +19,11 @@ module Commitphotos
         }
       )
      
-      FileUtils.rm(filename)
+      rm(filename)
       exit 0
     rescue => e
       puts "there was an error: #{e.message}"
-      FileUtils.rm(filename)
+      rm(filename)
       exit 1
     end
   end
