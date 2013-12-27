@@ -1,5 +1,21 @@
 #!/usr/bin/env ruby
 
 require 'commitphotos'
+require 'choice'
 
-Commitphotos.new(command: ARGV)
+include Commitphotos
+
+Choice.options do
+  header 'Options:'
+
+  option :global do
+    short '-g'
+    long '--global'
+    desc 'Install commitphotos globally so all new git repos will take photos.'
+  end
+end
+
+case ARGV[0]
+when 'install' then hook(Choice.choices.global)
+else puts Choice.help
+end
