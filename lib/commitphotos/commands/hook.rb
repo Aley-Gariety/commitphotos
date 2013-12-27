@@ -1,7 +1,7 @@
 require 'fileutils'
 
 module Commitphotos
-  def hook(global)
+  def hook(global, video)
     if global
       destination = `git config --get init.templatedir`.chomp
       if destination.empty? or !File.exist?(destination)
@@ -14,6 +14,6 @@ module Commitphotos
       abort 'Error: not a git repository.' unless File.exist? destination
     end
     
-    FileUtils.cp(File.join(File.dirname(__FILE__), '../hooks/post-commit'), File.expand_path(File.join(destination, 'post-commit')))
+    FileUtils.cp(File.join(File.dirname(__FILE__), "../hooks/post-commit-#{video ? 'video' : 'image'}"), File.expand_path(File.join(destination, 'post-commit')))
   end
 end

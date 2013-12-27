@@ -13,9 +13,15 @@ Choice.options do
     long '--global'
     desc 'Install commitphotos globally so all new git repos will take photos.'
   end
+  
+  option :video do
+    short '-v'
+    long '--video'
+    desc 'Create three-second gifs instead of photos.'
+  end
 end
 
 case ARGV[0]
-when 'install' then hook(Choice.choices.global)
+when 'install' then hook(Choice.choices[:global], Choice.choices[:video])
 else puts Choice.help
 end
