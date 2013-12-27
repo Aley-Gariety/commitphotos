@@ -1,5 +1,5 @@
 require "mini_magick"
-require "rest_client"
+require "rest-client"
 
 module Commitphotos
   def video
