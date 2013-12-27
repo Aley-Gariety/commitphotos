@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   # Dependencies
   spec.add_runtime_dependency "mini_magick"
   spec.add_runtime_dependency "choice"
+  spec.add_runtime_dependency "rest-client"
 
   # Development dependencies
   spec.add_development_dependency "bundler", "~> 1.3"
