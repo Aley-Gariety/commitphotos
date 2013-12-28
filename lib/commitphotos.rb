@@ -1,7 +1,7 @@
 require 'fileutils'
 require 'commitphotos/version'
 require 'mini_magick'
-require 'rvideo'
+require 'streamio-ffmpeg'
 require 'rest-client'
 
 include FileUtils
@@ -32,12 +32,16 @@ class Commitphotos
   
   # Setup photo or video capture
   def self.take(type)
-    filename = "/tmp/#{Time.now.to_i}.jpg"
+    
     
     begin
       case type
-      when :video then video(filename)
-      when :image then image(filename)
+      when :video
+        filename = "/tmp/#{Time.now.to_i}.mov"
+        video(filename)
+      when :image 
+        filename = "/tmp/#{Time.now.to_i}.jpg"
+        image(filename)
       end
     rescue => error
       abort "there was an error: #{error.message}"
@@ -59,19 +63,15 @@ class Commitphotos
   
   # Take a video
   def self.video(file)
-    `#{__FILE__}/../../videosnap -t 2 --no-audio #{file}`
-    
-    transcoder = RVideo::Transcoder.new
+    `#{DIR}/videosnap -t 2 --no-audio #{file}`
     
     begin
-      transcoder.execute("ffmpeg -i $input_file$", {
-        :input_file => file,
-        :output_file => file
-      })
-      
-      post(File.open file)
-    rescue TranscoderError => e
-      abort "Unable to transcode file: #{e.class} - #{e.message}"
+      video = FFMPEG::Movie.new(file)
+      gif = file.gsub('.mov', '.gif')
+      video.transcode(gif, '-pix_fmt rgb24 -r 10')
+      post(File.open gif)
+    rescue => e
+      abort "Unable to transcode file: #{e.message}"
     end
   end
   

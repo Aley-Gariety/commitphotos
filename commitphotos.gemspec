@@ -20,8 +20,7 @@ Gem::Specification.new do |spec|
 
   # Dependencies
   spec.add_runtime_dependency "mini_magick"
-  spec.add_runtime_dependency "active_support"
-  spec.add_runtime_dependency "rvideo"
+  spec.add_runtime_dependency "streamio-ffmpeg"
   spec.add_runtime_dependency "choice"
   spec.add_runtime_dependency "rest-client"
 
