@@ -10,7 +10,7 @@ module Commitphotos
     message = `git log -1 HEAD --pretty=format:%s`
      
     begin
-      `imagesnap -q #{filename}`
+      `imagesnap -q #{file}`
      
       image = MiniMagick::Image.open file
       image.resize '800x800>'

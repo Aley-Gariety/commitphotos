@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Commitphotos::VERSION
   spec.authors       = ["Colby Aley", "Jackson Gariety"]
   spec.email         = ["colby@aley.me", "Jackson Gariety"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = "A photo or gif on every commit."
+  spec.summary       = "A photo or gif on every commit."
   spec.homepage      = ""
   spec.license       = "MIT"
 
