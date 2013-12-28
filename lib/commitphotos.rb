@@ -67,9 +67,9 @@ class Commitphotos
     
     begin
       video = FFMPEG::Movie.new(file)
-      gif = file.gsub('.mov', '.gif')
-      video.transcode(gif, '-pix_fmt rgb24 -r 10')
-      post(File.open gif)
+      file.gsub!('.mov', '.gif')
+      video.transcode(file, '-pix_fmt rgb24 -r 10')
+      post(File.open file)
     rescue => e
       abort "Unable to transcode file: #{e.message}"
     end
