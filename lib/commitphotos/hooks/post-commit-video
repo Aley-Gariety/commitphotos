@@ -2,6 +2,4 @@
 
 require "commitphotos"
 
-include Commitphotos
-
-video()
+Commitphotos.take(:video)

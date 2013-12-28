@@ -3,8 +3,6 @@
 require 'commitphotos'
 require 'choice'
 
-include Commitphotos
-
 Choice.options do
   header 'Options:'
 
@@ -22,6 +20,6 @@ Choice.options do
 end
 
 case ARGV[0]
-when 'install' then hook(Choice.choices[:global], Choice.choices[:video])
+when 'install' then Commitphotos.hook(Choice.choices[:global], Choice.choices[:video])
 else puts Choice.help
 end
