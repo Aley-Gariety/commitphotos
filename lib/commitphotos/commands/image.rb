@@ -1,26 +1,31 @@
+require "mini_magick"
 require 'rest-client'
+require 'fileutils'
+
+include FileUtils
 
 module Commitphotos
   def image
-    filename = "/tmp/#{Time.now.to_i}.jpg"
+    file = "/tmp/#{Time.now.to_i}.jpg"
     message = `git log -1 HEAD --pretty=format:%s`
      
     begin
-      `imagesnap -q -w 3 #{filename}`
-      `convert #{filename} -resize '800x800>' #{filename}`
+      `imagesnap -q #{file}`
+     
+      image = MiniMagick::Image.open file
+      image.resize '800x800>'
      
       RestClient.post('http://commitphotos.herokuapp.com/photos/new', {
         "email" => `git config --get user.email`.chomp,
         "user_name" => `git config --get user.name`.chomp,
-        "photo" => File.open(filename)
-        }
-      )
+        "photo" => image
+      })
      
-      FileUtils.rm(filename)
+      remove file
       exit 0
-    rescue => e
-      puts "there was an error: #{e.message}"
-      FileUtils.rm(filename)
+    rescue => error
+      puts "there was an error: #{error.message}"
+      remove file
       exit 1
     end
   end
