@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Commitphotos::VERSION
   spec.authors       = ["Colby Aley", "Jackson Gariety"]
   spec.email         = ["colby@aley.me", "Jackson Gariety"]
-  spec.description   = "A photo or gif on every commit."
+  spec.description   = "Take a photo of yourself every time you commit and show it to the world."
   spec.summary       = "A photo or gif on every commit."
-  spec.homepage      = ""
+  spec.homepage      = "http://commitphotos.com/"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
 
   # Dependencies
   spec.add_runtime_dependency "mini_magick"
+  spec.add_runtime_dependency "streamio-ffmpeg"
   spec.add_runtime_dependency "choice"
   spec.add_runtime_dependency "rest-client"
 

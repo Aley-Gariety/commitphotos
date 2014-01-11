@@ -68,7 +68,7 @@ describe 'commitphotos' do
     end
     
     it 'should upload a file to commitphotos.com' do
-      `ruby`
+      # `ruby`
     end
   end
 end
