@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
-
-require "commitphotos"
-# require "#{File.dirname(__FILE__)}/../../commitphotos"
+require 'commitphotos'
 
 Commitphotos.take(:video)
