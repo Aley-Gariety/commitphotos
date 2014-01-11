@@ -3,13 +3,13 @@ require 'commitphotos/version'
 require 'mini_magick'
 require 'streamio-ffmpeg'
 require 'rest-client'
+require 'tempfile'
 
-include FileUtils
+require 'commitphotos/video'
+require 'commitphotos/image'
 
-class Commitphotos
-  DIR = File.expand_path(File.dirname(__FILE__))
-
-  # Installing and setting up commitphotos.
+class CommitPhoto
+  # This will setup Commitphotos for the user.
   def self.hook(global, video)
     if global
       destination = File.expand_path(`git config --get init.templatedir`.chomp)
@@ -30,54 +30,24 @@ class Commitphotos
     copy(local_post_commit, File.join(destination, 'post-commit'))
   end
 
-  # Setup photo or video capture
-  def self.take(type)
-
-    begin
-      case type
-      when :video
-        filename = "/tmp/#{Time.now.to_i}.mov"
-        video(filename)
-      when :image 
-        filename = "/tmp/#{Time.now.to_i}.jpg"
-        image(filename)
-      end
-    rescue => error
-      abort "there was an error: #{error.message}"
-    ensure
-      remove filename
-    end
+  def self.image
+    Image.new
   end
 
-  # Take an image
-  def self.image(file)
-    `#{DIR}/imagesnap -q #{file}`
-
-    image = MiniMagick::Image.open file
-    image.resize '800x800>'
-    image.write file
-
-    post(File.open file)
+  def self.video
+    Video.new
   end
 
-  # Take a video
-  def self.video(file)
-    `#{DIR}/videosnap -t 2 --no-audio #{file}`
+  private
 
-    begin
-      video = FFMPEG::Movie.new(file)
-      file.gsub!('.mov', '.gif')
-      video.transcode(file, '-pix_fmt rgb24 -r 10')
-      post(File.open file)
-    rescue => e
-      abort "Unable to transcode file: #{e.message}"
-    end
+  def dir
+    File.expand_path(File.dirname(__FILE__))
   end
 
-  # Upload the photo or video
-  def self.post(file)
+  # Take the photo or video and upload it to commitphotos.com.
+  def post(file)
     RestClient.post('http://commitphotos.herokuapp.com/photos/new',
-      email:`    git config --get user.email`.chomp,
+      email:     `git config --get user.email`.chomp,
       user_name: `git config --get user.name`.chomp,
       message:   `git log -1 HEAD --pretty=format:%s`,
       photo:     file

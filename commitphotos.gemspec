@@ -5,7 +5,7 @@ require 'commitphotos/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "commitphotos"
-  spec.version       = Commitphotos::VERSION
+  spec.version       = CommitPhoto::VERSION
   spec.authors       = ["Colby Aley", "Jackson Gariety"]
   spec.email         = ["colby@aley.me", "Jackson Gariety"]
   spec.description   = "Take a photo of yourself every time you commit and show it to the world."
