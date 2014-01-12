@@ -24,9 +24,9 @@ class CommitPhoto
 
     type = video ? 'video' : 'image'
 
-    local_post_commit = "#{DIR}/commitphotos/hooks/post-commit-#{type}"
+    local_post_commit = "#{File.expand_path(File.dirname(__FILE__))}/commitphotos/hooks/post-commit-#{type}"
 
-    copy(local_post_commit, File.join(destination, 'post-commit'))
+    FileUtils.copy(local_post_commit, File.join(destination, 'post-commit'))
   end
 
   def self.image
