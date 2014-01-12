@@ -3,7 +3,7 @@ class Image < CommitPhoto
     tempfile = Tempfile.new(Time.now.to_i.to_s)
     file = tempfile.path
 
-    `#{dir}/imagesnap -q #{file}`
+    `#{dir}/imagesnap -w 2 -q #{file}`
 
     begin
       image = MiniMagick::Image.open file

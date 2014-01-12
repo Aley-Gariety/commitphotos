@@ -49,7 +49,7 @@ class CommitPhoto
       email:     `git config --get user.email`.chomp,
       user_name: `git config --get user.name`.chomp,
       message:   `git log -1 HEAD --pretty=format:%s`,
-      photo:     file
+      photo:     File.new(file, 'rb')
     )
   end
 end
