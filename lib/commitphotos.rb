@@ -19,13 +19,14 @@ class CommitPhoto
       end
     else
       destination = File.expand_path(File.join(Dir.pwd, '.git/hooks'))
-      abort 'Error: not a git repository.' unless File.exist? destination
+      abort 'Error: not a git repository.' unless File.exist? File.join(Dir.pwd, '.git')
     end
 
     type = video ? 'video' : 'image'
 
     local_post_commit = "#{File.expand_path(File.dirname(__FILE__))}/commitphotos/hooks/post-commit-#{type}"
-
+    
+    FileUtils.mkdir_p(destination)
     FileUtils.copy(local_post_commit, File.join(destination, 'post-commit'))
   end
 
