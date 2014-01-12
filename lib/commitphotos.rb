@@ -31,10 +31,12 @@ class CommitPhoto
   end
 
   def self.image
+    puts "Say cheese!"
     Image.new
   end
 
   def self.video
+    puts "Say cheese!"
     Video.new
   end
 
@@ -52,5 +54,7 @@ class CommitPhoto
       message:   `git log -1 HEAD --pretty=format:%s`,
       photo:     File.new(file, 'rb')
     )
+
+    exit
   end
 end
