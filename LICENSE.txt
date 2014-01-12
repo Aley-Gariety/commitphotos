@@ -1,4 +1,4 @@
-Copyright (c) 2013 Colby Aley
+Copyright (c) 2014 Colby Aley & Jackson Gariety
 
 MIT License
 

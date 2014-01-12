@@ -1,7 +1,6 @@
 require 'fileutils'
 require 'commitphotos/version'
 require 'mini_magick'
-require 'streamio-ffmpeg'
 require 'rest-client'
 require 'tempfile'
 
@@ -46,7 +45,7 @@ class CommitPhoto
 
   # Take the photo or video and upload it to commitphotos.com.
   def post(file)
-    RestClient.post('http://commitphotos.herokuapp.com/photos/new',
+    RestClient.post('http://commitphotos.com/',
       email:     `git config --get user.email`.chomp,
       user_name: `git config --get user.name`.chomp,
       message:   `git log -1 HEAD --pretty=format:%s`,
