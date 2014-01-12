@@ -1,6 +1,6 @@
 # Commitphotos
 
-TODO: Write a gem description
+Take a photo or gif of yourself on each commit, and see it on commitphotos.com.
 
 ## Installation
 
@@ -8,7 +8,11 @@ TODO: Write a gem description
 
 ## Usage
 
-    $ commitphotos install (--global)
+    $ commitphotos install (--global) (--video)
+
+The `--global` option will install commitphotos on all future git repo initializations, clones, etc.
+
+The `--video` option will upload two-second gifs instead of still images.
 
 ## Contributing
 
