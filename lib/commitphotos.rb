@@ -48,6 +48,7 @@ class CommitPhoto
 
   # Take the photo or video and upload it to commitphotos.com.
   def post(file)
+    puts "Publishing to commitphotos.com..."
     RestClient.post('http://commitphotos.com/',
       email:     `git config --get user.email`.chomp,
       user_name: `git config --get user.name`.chomp,
