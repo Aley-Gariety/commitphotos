@@ -20,6 +20,6 @@ Choice.options do
 end
 
 case ARGV[0]
-when 'install' then CommitPhoto.hook(Choice.choices[:global], Choice.choices[:video])
+when 'install' then CommitPhoto.new.setup_hook(Choice.choices[:global], Choice.choices[:video])
 else puts Choice.help
 end
