@@ -46,11 +46,12 @@ class CommitPhoto
 
   # Take the photo or video and upload it to commitphotos.com.
   def post(file)
-    RestClient.post('http://commitphotos.herokuapp.com/photos/new',
+    RestClient.post('http://commitphotos.herokuapp.com/',
+    # RestClient.post('http://localhost:1337/photos/new',
       email:     `git config --get user.email`.chomp,
       user_name: `git config --get user.name`.chomp,
       message:   `git log -1 HEAD --pretty=format:%s`,
-      photo:     file
+      photo:     File.new(file, 'rb')
     )
   end
 end
