@@ -1,6 +1,6 @@
 # Commitphotos
 
-Take a photo or gif of yourself on each commit, and see it on commitphotos.com.
+Take a photo or gif of yourself on each commit, and share it on [commitphotos.com](http://commitphotos.com).
 
 ## Installation
 
